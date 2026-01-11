@@ -1,0 +1,81 @@
+<%# app/components/task_component.html.erb %>
+
+<div class="w-full max-w-lg bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-2xl"
+     id="task_card"
+     data-controller="user-sync"
+     data-user-sync-url-value="<%= @task.persisted? ? sync_task_path(@task) : '#' %>"
+     data-user-sync-toggle-url-value="<%= @task.persisted? ? toggle_task_path(@task) : '#' %>">
+  <%# 👆 ADICIONADO: A URL para o toggle de status %>
+
+  <div class="p-8 border-b border-gray-100">
+    <div class="flex justify-between items-start">
+      <div>
+        <p class="text-xs font-semibold tracking-wider text-gray-400 uppercase mb-1">Tarefa #<%= @task.id %></p>
+        <h5 class="text-2xl font-bold text-gray-900 leading-tight">
+          <%= @task.title %>
+        </h5>
+      </div>
+
+      <button
+        data-action="click->user-sync#toggleStatus"
+        class="group cursor-pointer focus:outline-none transition-transform active:scale-95"
+        title="Clique para alterar o status">
+
+        <span data-user-sync-target="badge"
+              class="<%= @task.completed ? 'bg-green-100 text-green-700 border-green-200' : 'bg-amber-100 text-amber-700 border-amber-200' %> px-3 py-1 rounded-full text-xs font-bold border transition-colors duration-300 flex items-center gap-1">
+
+          <span data-user-sync-target="statusText">
+            <%= @task.completed ? 'Concluída' : 'Pendente' %>
+          </span>
+
+          <span class="hidden group-hover:block text-[10px] opacity-70">✏️</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="p-8 bg-white space-y-6">
+    <div class="flex items-center gap-2 mb-4">
+      <div class="h-8 w-1 bg-indigo-500 rounded-full"></div>
+      <h6 class="text-sm font-bold text-gray-900 uppercase tracking-wide">Integração Externa</h6>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
+
+      <div class="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-100 transition-colors hover:bg-slate-100">
+        <div class="p-2 bg-white rounded-lg shadow-sm text-xl mr-4">👤</div>
+        <div>
+          <p class="text-xs text-gray-500 font-medium uppercase">Responsável</p>
+          <p class="text-gray-900 font-semibold text-lg" data-user-sync-target="name">
+            <%= @task.external_user_name.presence || 'Não atribuído' %>
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col p-4 bg-slate-50 rounded-xl border border-slate-100 transition-colors hover:bg-slate-100">
+          <p class="text-xs text-gray-500 font-medium uppercase mb-1">🏢 Empresa</p>
+          <p class="text-gray-800 font-medium truncate" data-user-sync-target="company">
+            <%= @task.external_company.presence || '-' %>
+          </p>
+        </div>
+
+        <div class="flex flex-col p-4 bg-slate-50 rounded-xl border border-slate-100 transition-colors hover:bg-slate-100">
+          <p class="text-xs text-gray-500 font-medium uppercase mb-1">📍 Cidade</p>
+          <p class="text-gray-800 font-medium truncate" data-user-sync-target="city">
+            <%= @task.external_city.presence || '-' %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 bg-gray-50 border-t border-gray-100">
+    <button data-action="click->user-sync#sync"
+            class="w-full group relative flex justify-center items-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all shadow-md hover:shadow-lg active:bg-indigo-800">
+
+      <span class="mr-2 group-hover:animate-spin">🔄</span>
+      Sincronizar Dados da API
+    </button>
+  </div>
+</div>

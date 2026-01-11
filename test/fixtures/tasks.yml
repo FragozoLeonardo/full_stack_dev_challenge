@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  completed: false
+  external_user_name: MyString
+  external_company: MyString
+  external_city: MyString
+
+two:
+  title: MyString
+  completed: false
+  external_user_name: MyString
+  external_company: MyString
+  external_city: MyString
