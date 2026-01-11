@@ -4,7 +4,7 @@ Uma aplicação Rails focada em **interatividade moderna** (SPA-feel), **arquite
 
 O objetivo foi criar uma interface reativa para gerenciamento de tarefas e sincronização de dados externos sem a necessidade de recarregar a página.
 
-![Ruby](https://img.shields.io/badge/Ruby-3.x-red)
+![Ruby](https://img.shields.io/badge/Ruby-4.x-red)
 ![Rails](https://img.shields.io/badge/Rails-8.x-red)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-CSS-blue)
 ![RSpec](https://img.shields.io/badge/Tests-RSpec-green)
